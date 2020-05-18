@@ -48,6 +48,10 @@ class AlienInvasion:
             self.ship.is_moving_right = True
         elif key_pressed == pygame.K_LEFT:
             self.ship.is_moving_left = True
+        if key_pressed == pygame.K_UP:
+            self.ship.is_moving_up = True
+        elif key_pressed == pygame.K_DOWN:
+            self.ship.is_moving_down = True
         elif key_pressed == pygame.K_q:
             self._quit_game()
 
@@ -56,6 +60,10 @@ class AlienInvasion:
             self.ship.is_moving_right = False
         elif key_pressed == pygame.K_LEFT:
             self.ship.is_moving_left = False
+        if key_pressed == pygame.K_UP:
+            self.ship.is_moving_up = False
+        elif key_pressed == pygame.K_DOWN:
+            self.ship.is_moving_down = False
 
     def _quit_game(self):
         sys.exit()
