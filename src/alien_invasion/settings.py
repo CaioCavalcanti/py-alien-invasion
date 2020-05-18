@@ -7,7 +7,5 @@ class Settings:
         self.screen_width = 1200
         self.screen_height = 800
         self.bg_color = (230, 230, 230)
-
-    def get_screen_size(self):
-        """Returns a tuple with screen width and height"""
-        return (self.screen_width, self.screen_height)
+        # Ship settings
+        self.ship_spped = 1.5

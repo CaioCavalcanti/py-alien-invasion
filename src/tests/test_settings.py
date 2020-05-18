@@ -1,8 +1,9 @@
+from alien_invasion.settings import Settings
 import sys
 import unittest
 
 sys.path.insert(1, '../alien_invasion')
-from alien_invasion.settings import Settings
+
 
 class SettingsTests(unittest.TestCase):
     """Tests for the Settings class"""
@@ -23,6 +24,10 @@ class SettingsTests(unittest.TestCase):
     def test_get_screen_size_is_tuple(self):
         """Tests that screen size returns a tuple with screen width and height"""
         assert self.settings.get_screen_size() == (1200, 800)
+
+    def test_ship_speed_is_1point5(self):
+        """Tests that ship speed is set to 1.5 by default"""
+        assert self.ship_speed == 1.5
 
 
 if __name__ == '__main__':
