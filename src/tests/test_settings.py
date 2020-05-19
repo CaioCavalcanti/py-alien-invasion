@@ -27,7 +27,28 @@ class SettingsTests(unittest.TestCase):
 
     def test_ship_speed_is_1point5(self):
         """Tests that ship speed is set to 1.5 by default"""
-        assert self.ship_speed == 1.5
+        assert self.settings.ship_speed == 1.5
+
+    def test_bullet_speed_is_1(self):
+        """Tests that bullet speed is set to 1 by default"""
+        assert self.settings.bullet_speed == 1.0
+
+    def test_bullet_size_is_3x15(self):
+        """Tests that bullet size is set to 3x15 by default"""
+        assert self.settings.bullet_width == 3
+        assert self.settings.bullet_height == 15
+
+    def test_bullet_color_is_dark_grey(self):
+        """Tests that bullet color is set to dark grey by default"""
+        assert self.settings.bullet_color == (60, 60, 60)
+
+    def test_get_bullet_size_is_tuple(self):
+        """Tests that get_bullet_size returns a tuple with bullet width and height"""
+        assert self.settings.get_bullet_size() == (3, 15)
+
+    def test_bullets_allowed_is_3(self):
+        """Tests that only 3 bullets are allowed by default"""
+        assert self.settings.bullets_allowed == 3
 
 
 if __name__ == '__main__':

@@ -35,7 +35,7 @@ class Ship:
 
     def update(self):
         """Update the ship's position based on current moving direction"""
-        ship_speed = self.settings.ship_spped
+        ship_speed = self.settings.ship_speed
         if self.is_moving_right and self.rect.right < self.screen_rect.right:
             self.x += ship_speed
         if self.is_moving_left and self.rect.left > 0:
