@@ -3,6 +3,7 @@ import pygame
 
 from settings import Settings
 from ship import Ship
+from alien import Alien
 from bullet import Bullet
 
 
@@ -19,6 +20,9 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self):
         """Start the main loop for the game"""
@@ -55,6 +59,7 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw()
+        self.aliens.draw(self.screen)
 
         # Make the most recently drawn screen visible
         pygame.display.flip()
@@ -88,6 +93,26 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _create_fleet(self):
+        number_aliens = self._get_number_aliens()
+        for alien_number in range(number_aliens):
+            self._create_alien(alien_number)
+
+    def _get_number_aliens(self):
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        alien_required_space = 2 * alien_width
+        available_space_x = self.settings.screen_width - alien_required_space
+        number_aliens = available_space_x // alien_required_space
+        return number_aliens
+
+    def _create_alien(self, alien_number):
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        alien.x = alien_width + 2 * alien_width * alien_number
+        alien.rect.x = alien.x
+        self.aliens.add(alien)
 
     def _quit_game(self):
         sys.exit()
