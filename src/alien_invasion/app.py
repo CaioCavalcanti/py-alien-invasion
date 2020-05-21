@@ -95,23 +95,32 @@ class AlienInvasion:
             self.bullets.add(new_bullet)
 
     def _create_fleet(self):
-        number_aliens = self._get_number_aliens()
-        for alien_number in range(number_aliens):
-            self._create_alien(alien_number)
-
-    def _get_number_aliens(self):
         alien = Alien(self)
-        alien_width = alien.rect.width
-        alien_required_space = 2 * alien_width
-        available_space_x = self.settings.screen_width - alien_required_space
-        number_aliens = available_space_x // alien_required_space
+        number_rows = self._get_number_rows(alien.rect.height)
+        number_aliens = self._get_number_aliens_per_row(alien.rect.width)
+        for row_number in range(number_rows):
+            for alien_number in range(number_aliens):
+                self._create_alien(alien_number, row_number)
+
+    def _get_number_aliens_per_row(self, alien_width):
+        alien_required_width = 2 * alien_width
+        available_width = self.settings.screen_width - alien_required_width
+        number_aliens = available_width // alien_required_width
         return number_aliens
 
-    def _create_alien(self, alien_number):
+    def _get_number_rows(self, alien_height):
+        available_height = (self.settings.screen_height -
+                            (3 * alien_height) - self.ship.rect.height)
+        number_rows = available_height // (2 * alien_height)
+        return number_rows
+
+    def _create_alien(self, alien_number, row_number):
         alien = Alien(self)
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 2 * alien_width * alien_number
+        alien.y = alien_height + 2 * alien_height * row_number
         alien.rect.x = alien.x
+        alien.rect.y = alien.y
         self.aliens.add(alien)
 
     def _quit_game(self):
