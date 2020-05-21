@@ -50,6 +50,18 @@ class SettingsTests(unittest.TestCase):
         """Tests that only 3 bullets are allowed by default"""
         assert self.settings.bullets_allowed == 3
 
+    def test_alien_speed(self):
+        """Tests that alien default speed is 1"""
+        assert self.settings.alien_speed == 1.0
+
+    def test_fleet_drop_speed(self):
+        """Tests that the alien fleet drop speed is 10 by default"""
+        assert self.settings.fleet_drop_speed == 10
+
+    def test_fleet_direction(self):
+        """Tests that the alien fleet starts moving to the right by default"""
+        assert self.settings.fleet_direction == 1
+
 
 if __name__ == '__main__':
     unittest.main()
