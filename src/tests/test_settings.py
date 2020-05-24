@@ -29,6 +29,10 @@ class SettingsTests(unittest.TestCase):
         """Tests that ship speed is set to 1.5 by default"""
         assert self.settings.ship_speed == 1.5
 
+    def test_ship_limit_is_3(self):
+        """Tests that the limit of ships is set to 3 by default"""
+        assert self.settings.ship_limit == 3
+
     def test_bullet_speed_is_1(self):
         """Tests that bullet speed is set to 1 by default"""
         assert self.settings.bullet_speed == 1.0
