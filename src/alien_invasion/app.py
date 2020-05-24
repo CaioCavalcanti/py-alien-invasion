@@ -74,6 +74,7 @@ class AlienInvasion:
         self._check_fleet_reached_edge()
         self.aliens.update()
         self._check_ship_alien_collision()
+        self._check_aliens_hit_bottom()
 
     def _check_fleet_reached_edge(self):
         """Checks if an alien reached an edge"""
@@ -104,6 +105,15 @@ class AlienInvasion:
         self.ship.center()
         # Pause
         sleep(0.5)
+
+    def _check_aliens_hit_bottom(self):
+        """Checks if any alien hit the bottom of the screen"""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                # Treat this the same as if the ship got hit
+                self._hit_ship()
+                break
 
     def _update_screen(self):
         """Redraw the screen"""
