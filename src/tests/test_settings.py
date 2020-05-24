@@ -29,6 +29,10 @@ class SettingsTests(unittest.TestCase):
         """Tests that ship speed is set to 1.5 by default"""
         assert self.settings.ship_speed == 1.5
 
+    def test_ship_limit_is_3(self):
+        """Tests that the limit of ships is set to 3 by default"""
+        assert self.settings.ship_limit == 3
+
     def test_bullet_speed_is_1(self):
         """Tests that bullet speed is set to 1 by default"""
         assert self.settings.bullet_speed == 1.0
@@ -49,6 +53,18 @@ class SettingsTests(unittest.TestCase):
     def test_bullets_allowed_is_3(self):
         """Tests that only 3 bullets are allowed by default"""
         assert self.settings.bullets_allowed == 3
+
+    def test_alien_speed(self):
+        """Tests that alien default speed is 1"""
+        assert self.settings.alien_speed == 1.0
+
+    def test_fleet_drop_speed(self):
+        """Tests that the alien fleet drop speed is 10 by default"""
+        assert self.settings.fleet_drop_speed == 10
+
+    def test_fleet_direction(self):
+        """Tests that the alien fleet starts moving to the right by default"""
+        assert self.settings.fleet_direction == 1
 
 
 if __name__ == '__main__':
