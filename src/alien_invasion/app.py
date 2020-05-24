@@ -7,6 +7,7 @@ from ship import Ship
 from alien import Alien
 from bullet import Bullet
 from game_stats import GameStats
+from button import Button
 
 
 class AlienInvasion:
@@ -26,6 +27,7 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
+        self.play_button = Button(self, "Play")
 
     def run_game(self):
         """Start the main loop for the game"""
@@ -46,6 +48,27 @@ class AlienInvasion:
                 self._handle_keydown_event(event.key)
             elif event.type == pygame.KEYUP:
                 self._handle_keyup_event(event.key)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
+
+    def _check_play_button(self, mouse_pos):
+        """Starts a new game when the player clicks play"""
+        game_active = self.stats.game_active
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if not game_active and button_clicked:
+            self._start_game()
+
+    def _start_game(self):
+        self.stats.reset_stats()
+        self.stats.game_active = True
+
+        self.aliens.empty()
+        self.bullets.empty()
+
+        self._create_fleet()
+        self.ship.center()
+        pygame.mouse.set_visible(False)
 
     def _update_bullets(self):
         """Update bullets on the screen"""
@@ -109,6 +132,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_aliens_hit_bottom(self):
         """Checks if any alien hit the bottom of the screen"""
@@ -127,6 +151,9 @@ class AlienInvasion:
             bullet.draw()
         self.aliens.draw(self.screen)
 
+        if not self.stats.game_active:
+            self.play_button.draw()
+
         # Make the most recently drawn screen visible
         pygame.display.flip()
 
@@ -139,6 +166,8 @@ class AlienInvasion:
             self.ship.is_moving_up = True
         elif key_pressed == pygame.K_DOWN:
             self.ship.is_moving_down = True
+        elif key_pressed == pygame.K_p:
+            self._start_game()
         elif key_pressed == pygame.K_q:
             self._quit_game()
         elif key_pressed == pygame.K_SPACE:
