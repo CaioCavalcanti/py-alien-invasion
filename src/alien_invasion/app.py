@@ -62,6 +62,7 @@ class AlienInvasion:
     def _start_game(self):
         self.stats.reset_stats()
         self.stats.game_active = True
+        self.settings.initialize_dynamic_settings()
 
         self.aliens.empty()
         self.bullets.empty()
@@ -86,6 +87,7 @@ class AlienInvasion:
         # Destroy existing bullets
         self.bullets.empty()
         self._create_fleet()
+        self.settings.increase_speed()
 
     def _remove_bullets_off_screen(self):
         """Removes bullets that have disappeared from the screen"""
