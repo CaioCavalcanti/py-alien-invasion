@@ -10,3 +10,9 @@ class GameStats():
     def reset_stats(self):
         """Initialize statistics that can change during the game"""
         self.ships_left = self.settings.ship_limit
+        self.score = 0
+
+    def update_score(self, aliens_hit):
+        """Updates score based on the number of aliens hit"""
+        points_scored = aliens_hit * self.settings.alien_points
+        self.score += points_scored

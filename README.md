@@ -23,3 +23,6 @@ $ python3 src/alien_invasion/app.py
 ```sh
 $ python3 -m unittest discover ./src
 ```
+
+## TODO
+- [ ] Difficulty levels: let the player choose the difficulty level, change game tempo and scoring based on that
