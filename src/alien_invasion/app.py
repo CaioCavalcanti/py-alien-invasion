@@ -66,6 +66,7 @@ class AlienInvasion:
         self.stats.reset_stats()
         self.stats.game_active = True
         self.scoreboard.render_score()
+        self.scoreboard.render_level()
         self.settings.initialize_dynamic_settings()
 
         self.aliens.empty()
@@ -87,8 +88,9 @@ class AlienInvasion:
         if aliens_hit > 0:
             self.stats.update_score(aliens_hit)
             self.scoreboard.render_score()
+            self.scoreboard.check_highscore()
         if not self.aliens:
-            self._start_new_phase()
+            self._start_new_level()
 
     def _count_aliens_hit_by_bullets(self):
         aliens_hit = 0
@@ -101,11 +103,13 @@ class AlienInvasion:
                 aliens_hit += len(aliens)
         return aliens_hit
 
-    def _start_new_phase(self):
+    def _start_new_level(self):
         # Destroy existing bullets
         self.bullets.empty()
         self._create_fleet()
         self.settings.increase_speed()
+        self.stats.level += 1
+        self.scoreboard.render_level()
 
     def _remove_bullets_off_screen(self):
         """Removes bullets that have disappeared from the screen"""
