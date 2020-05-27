@@ -1,15 +1,17 @@
 
 
 from helpers import load_image
+from pygame.sprite import Sprite
 
 
-class Ship:
+class Ship(Sprite):
     """A class to manage the ship"""
 
     def __init__(self, ai_game):
         """Initialize the ship and set its starting position"""
+        super().__init__()
         self.screen = ai_game.screen
-        self.screen_rect = ai_game.screen.get_rect()
+        self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
 
         # Load the ship image and get its rect
@@ -29,7 +31,7 @@ class Ship:
         self.is_moving_up = False
         self.is_moving_down = False
 
-    def blitme(self):
+    def draw(self):
         """Draw the ship at its current location"""
         self.screen.blit(self.image, self.rect)
 
