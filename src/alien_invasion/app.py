@@ -67,6 +67,7 @@ class AlienInvasion:
         self.stats.game_active = True
         self.scoreboard.render_score()
         self.scoreboard.render_level()
+        self.scoreboard.render_ships()
         self.settings.initialize_dynamic_settings()
 
         self.aliens.empty()
@@ -146,6 +147,7 @@ class AlienInvasion:
         """Respond to the ship being hit by an alien"""
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
+            self.scoreboard.render_ships()
             # Get rid of any remaining aliens and bullets
             self.bullets.empty()
             self.aliens.empty()
