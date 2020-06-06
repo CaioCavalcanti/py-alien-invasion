@@ -14,15 +14,26 @@ This is one of the projects from the book [Python Crash Course: A Hands-On, Proj
 
 ## Running
 ```sh
+$ cd src
+$ python3 -m venv .venv
+$ source .venv/bin/activate
 # Recent versions of Mac OS X requires PyGame 2
-$ python3 -m pip install -U pygame==2.0.0.dev6 --user
-$ python3 src/alien_invasion/app.py
+$ (.venv) pip install -r requirements.txt
+$ (.venv) python alien_invasion/app.py
 ```
 
-## Tests
+## Tests and Cod
 ```sh
-$ python3 -m unittest discover ./src
+$ (.venv) python -m unittest discover ./src
 ```
+
+To run the tests with code coverage report, execute the following commands
+```sh
+$ (.venv) pip install coverage
+$ (.venv) coverage run --source=./src/alien_invasion -m unittest discover ./src
+$ (.venv) coverage html
+```
+And open `./htmlcov/index.html` on browser to see the code coverage report
 
 ## TODO
 - [ ] Difficulty levels: let the player choose the difficulty level, change game tempo and scoring based on that

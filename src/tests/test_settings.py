@@ -1,6 +1,7 @@
-from alien_invasion.settings import Settings
 import sys
 import unittest
+
+from alien_invasion.settings import Settings
 
 sys.path.insert(1, '../alien_invasion')
 
@@ -33,9 +34,9 @@ class SettingsTests(unittest.TestCase):
         """Tests that the limit of ships is set to 3 by default"""
         assert self.settings.ship_limit == 3
 
-    def test_bullet_speed_is_1(self):
-        """Tests that bullet speed is set to 1 by default"""
-        assert self.settings.bullet_speed == 1.0
+    def test_bullet_speed_is_3(self):
+        """Tests that bullet speed is set to 3 by default"""
+        assert self.settings.bullet_speed == 3.0
 
     def test_bullet_size_is_3x15(self):
         """Tests that bullet size is set to 3x15 by default"""
